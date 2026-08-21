@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/asp master.slnx/FileContentIndex/dde9b3a9-7a7d-4bdf-b597-8f89c2c6c966.vsidx
+/.vs/BulkyBook.slnx
+/.vs
+/BulkyBookWeb/obj/Debug/net10.0/compressed
