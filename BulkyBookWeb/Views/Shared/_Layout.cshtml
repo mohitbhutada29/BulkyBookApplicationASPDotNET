@@ -1,0 +1,139 @@
+﻿@* (11) Master page: reference to css files, java script files *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BulkyBookWeb</title>
+    <script type="importmap"></script>
+
+    @* (35) Commenting out the default .css file, as we will be using the one referenced in (34) *@
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BulkyBookWeb.styles.css" asp-append-version="true" />
+    @* (92) *@
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" asp-append-version="true" />
+
+    @* (34) The static content added in the wwwroot folder can be referenced here *@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />  @* Library for .css styles *@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet" /> @* Library for icons *@
+
+
+</head>
+@* (40) Added class in the body here to applly css changes*@
+<body class="d-flex flex-column min-vh-100" style="background-color:#f5f5f5">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#191414;">
+            <div class="container-fluid">
+                @* anchor tag *@
+@*                 Copying the anchor tag style from "Snippets\Section 3 - Category List\2 Layout - UI.txt"*@                
+                <a class="navbar-brand d-flex align-items-center gap-2" asp-area="" asp-controller="Home" asp-action="Index">
+                    <div class="d-flex align-items-center justify-content-center rounded" style="width: 36px; height: 36px; background: rgba(255,255,255,0.2);">
+                        <img src="/images/book.png" style="width: 24px; height: 24px;" />
+                    </div>
+                    <span class="fw-bold fs-5 d-none d-sm-inline">Bulky<span style="color: #1DB954;">Book</span></span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg=0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        @* (27)Adding Category in the header layout *@
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Category" asp-action="Index">Category</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="flex-grow-1">
+        <main role="main" class="pb-3">
+            @* (100) Pasting notification here*@
+            <partial name="_Notification" />
+            @RenderBody()
+            @* (12) Displays the ultimate view from the controller *@
+        </main>
+    </div>
+
+@*     (39) I will comment this out since we have used the footer code snippet from (38)
+ *@    @* <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - BulkyBookWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer> *@
+
+
+@*     (38) We will now start making changes to the styles. This code snippet is been used from 
+    Course Content\Snippets\Section 3 - Category List\2 Layout - UI.txt" *@
+    <footer class="mt-auto py-4" style="background: #0D0D0D;">
+        <div class="container">
+            <div class="row align-items-center gy-3">
+                <div class="col-sm-4 d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center justify-content-center rounded-circle" style="width: 40px; height: 40px; background: #17A34A;">
+                        <i class="bi bi-book fs-5" style="color: #0D0D0D;"></i>
+                    </div>
+                    <div>
+                        <p class="mb-0 fw-semibold text-white small">BulkyBook</p>
+                        <p class="mb-0 text-secondary" style="font-size: 0.75rem;">Your Gateway to Endless Stories</p>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <p class="mb-0 text-secondary small">&copy; @DateTime.Now.Year BulkyBook. All rights reserved.</p>
+                    <p class="mb-0 text-secondary" style="font-size: 0.75rem;">Made with <i class="bi bi-heart mx-1" style="color: #17A34A;"></i> by DotNetMastery</p>
+                </div>
+                <div class="col-sm-4 d-flex justify-content-sm-end justify-content-center gap-2">
+                    <a href="#" class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(255,255,255,0.1);">
+                        <i class="bi bi-twitter-x text-secondary small"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(255,255,255,0.1);">
+                        <i class="bi bi-facebook text-secondary small"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(255,255,255,0.1);">
+                        <i class="bi bi-instagram text-secondary small"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @* (37) We will comment out the default bootstrap reference as we are using the one referenced in (36) *@
+  @*   <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @* (36) We would have to change the javascript file as well as present in the 
+    Course Content\Snippets\Section 3 - Category List  *@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+
+
+@*   (101) Adding new projects of type Class Library in the solution
+  BulkyBook.DataAccess (Also called as DAL or Data Access Layer) : Contains the data access logic for the application like the Entity Framework DbContext and the Repository classes
+  BulkyBook.BusinessAccess (Also called as BAL or Business Access Layer) : Contains the business logic for the application
+  BulkyBook.Models : Contains the models for the application
+  BulkyBook.Utility : basic helpers for eg like storing constants
+  
+  We had everything in the BulkyBookWeb project, but we will now move the code to these new projects. 
+  This is a good practice to separate concerns and make the application more maintainable.
+
+  Category.cs model will be moved to the BulkyBook.Models project. 
+  The DbContext and Repository classes will be moved to the BulkyBook.DataAccess project.
+  The business logic will be moved to the BulkyBook.BusinessAccess project. The utility classes will be moved to the BulkyBook.Utility project.
+  *@

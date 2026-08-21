@@ -1,0 +1,8 @@
+﻿@* (13) How do we know that "_Layout.cshtml is the default layout file for the views in this project?"
+_ViewStart.cshtml is a special file in ASP.NET Core MVC that is executed before any view is rendered. 
+The purpose of this file is to define common settings for all views in the application, such as the layout file to be used.
+If you want to create a new master page, first create that in the Shared folder and then reference it here.*@
+
+@{
+    Layout = "_Layout";
+}

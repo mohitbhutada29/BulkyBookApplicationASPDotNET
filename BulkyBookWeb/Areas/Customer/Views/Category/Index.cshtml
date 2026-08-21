@@ -1,0 +1,108 @@
+﻿@using BulkyBook.Models
+
+
+
+@* (32) This is the model that we get from the CategoryController  *@
+@model List<Category>
+
+@* <h1>Category List</h1>
+ *@
+
+@* (31) We will display here the categories that we receive from the database
+This is a Razor page wherein we can combine html and c# code.
+The C# code is to be separated by @ sign.
+
+But how will the controller know that we have available list of categories?
+We passed the categories in the Index method in the CategoryController.
+This is done using model as shown in (32)
+*@
+
+
+@* @foreach (var category in Model)
+{
+    <p>@category.Name</p> 
+    // here if you notice, we have to write the @ again. This is because we are in HTML.
+    // Whenever we are in HTML, to add C# code, we use @ sign.
+
+ *@
+
+
+@* (33) We will now style the application.
+    For that we use the resources present in Course Content Folder.
+    1. Create a images folder in wwwroot which will contain the images. This all will be static content 
+*@
+
+@* ********************************************************************************************************************* *@
+
+
+@* (42) Styling the category index page, everything before this is commented at this step *@
+
+<div class="container-fluid py-4">
+
+    @* (86) Displaying success message if TempData is not null. Test this and update a category, you will be able to see a message. 
+        TempData is loaded just for one request, when you refresh the page the message will be gone.
+
+        Going ahead there will be messages for failure. Also we might need to show messages on all the pages.
+        It means we might need to copy paste this at all the pages where we want to display this.
+        This does not follow DRY- Do not repeat yourself principle. For this we can make use of the partial views.
+        Will comment this and add it in the _Notification.cshtml in (87)
+    *@
+   @*  @if(TempData["success"]!=null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">@TempData["success"]</div>
+    } *@
+
+    @* (90)  With this single line, wherever we have to display TempData or notificiation, we can add partial
+        views like this. This is beneficial as if we have to change something in the future, we only have to update one file 
+        which is _Notification.cshtml
+    *@
+    @* <partial name="_Notification" /> *@
+
+@*     (99) To make the notification accessbile from all pages and not just index, we will comment it from here and add it in the _Layout.cshtml file.
+    This way we can access it from all pages.  <partial name="_Notification" /> this above is commented at this step 99 and added at 100*@
+    <div class="card border shadow-sm overflow-hidden">
+        <div class="card-header text-white py-3 px-4 d-flex align-items-center justify-content-between" style="background: linear-gradient(to right, #065f46, #282828, #191414);">
+            <div>
+                <h5 class="mb-0 fw-bold"><i class="bi bi-grid me-2"></i>Categories</h5>
+                <p class="mb-0 small" style="color: #1DB954;">Manage your product categories</p>
+            </div>
+            @* (43) Adding the categories *@
+            <a asp-controller="Category" asp-action="Create" class="btn btn-sm btn-outline-light fw-semibold d-inline-flex align-items-center gap-1">
+                <i class="bi bi-plus-lg"></i> New Category
+            </a>
+        </div>
+        <div class="table-responsive">
+            <table class="table-styled">
+                <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Display Order</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample Row - Students will replace with @@foreach loop -->
+                    @* (43) Here we now add a C# for loop to display all the categories *@
+
+                    @foreach (var category in Model)
+                    {
+                        <tr>
+                            <td class="fw-medium" style="color: #1e293b;">@category.Name</td>
+                            <td><span class="badge bg-light text-dark border">@category.DisplayOrder</span></td>
+                            <td class="text-end">
+                                @* (68) Adding update and edit functionality *@
+                                @*(71) We will add the asp-route-nameGivenInControllerActionMethod to pass the id of the category to the Update and Delete methods in the CategoryController. 
+                                This is required because we need to know which category to update or delete. *@
+                                <a asp-action="Update" asp-route-id="@category.Id" class="btn btn-sm btn-outline-success me-1"><i class="bi bi-pencil-square me-1"></i>Edit</a>
+                                <a asp-action="Delete" asp-route-id="@category.Id" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash me-1"></i>Delete</a>
+                            </td>
+                        </tr>
+                    }
+
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

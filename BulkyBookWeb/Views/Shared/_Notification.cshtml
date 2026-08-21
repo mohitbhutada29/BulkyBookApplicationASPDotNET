@@ -1,0 +1,56 @@
+﻿@* (87) We have created this partial view to display the notification messages.
+    Partial Views are usually prefixed by underscore "_Notification".
+ *@
+
+ @if(TempData["success"]!=null)
+    {
+        @*  (94) Post notification have a dependency on jQuery. In _Layout we already have a jQuery. But we need to copy it from there and paste it here *@
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+        @* (93)*@
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+ @*        <div class="alert alert-success alert-dismissible fade show" role="alert">@TempData["success"]</div> *@
+
+@* 
+    (96) I will comment the earlier code (93) here. Add add the code from the webpage of Toaster notifications  https://github.com/CodeSeven/toastr
+    It is a java script hence has to be inside script tag same for error in (97)*@
+    <script>
+        toastr.success('@TempData["success"]')
+    </script>
+    }
+
+
+@* (88) Will add new conditions for error *@
+@if (TempData["error"] != null)
+{
+    @* (95) adding the .js and jQuery links for the error notification as well. *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+   @*  (*****) *@
+    @* <div class="alert alert-danger alert-dismissible fade show" role="alert">@TempData["error"]</div> *@
+
+    @* (98) I will comment the earlier code (*****) here. Add add the code from the webpage of Toaster notifications  https://github.com/CodeSeven/toastr
+    And copy the same error message for error
+    if this does not work use the minified file links from the website *@ 
+
+    <script>
+        toastr.error('@TempData["error"]')
+    </script>
+
+}
+
+
+@* We will consume this in (90) *@
+
+@* 
+(91) Instead of showing boring notifications like this, we can show toaster notifications
+Google toaster notification https://codeseven.github.io/toastr/ 
+We have to copy the Debug .js links in the project as given on the webpage 
+for eg: //cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css andd add it to our _Layout.cshtml where we 
+have links to our external resources. We will also add the .js file in the _Layout.cshtml where we have added the other .js files. in (92) and (93)
+
+*@
+
+
+

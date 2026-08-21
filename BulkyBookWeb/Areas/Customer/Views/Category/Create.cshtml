@@ -1,0 +1,85 @@
+﻿@using BulkyBook.Models
+
+@* (46) Now we add the model to bind the info added in the view to the controller 
+    Model is more like an object which binds its properties with the view.
+*@
+@model Category
+
+
+
+
+@* (45) Create view created to add categories
+The code snippet for this view is copied from "Course Content\Snippets\Section 3 - Category List\5 Category Create.txt"
+*@
+
+<div class="container-fluid py-3">
+    <a href="#" class="text-decoration-none text-secondary small fw-medium d-inline-flex align-items-center gap-1 mb-3">
+        <i class="bi bi-arrow-left"></i> Back to categories
+    </a>
+    <div class="card border shadow-sm overflow-hidden">
+        <div class="card-header text-white py-3 px-4" style="background: linear-gradient(to right, #065f46, #282828, #191414);">
+            <h5 class="mb-0 fw-bold"><i class="bi bi-plus-lg me-2"></i>Create Category</h5>
+            <p class="mb-0 small" style="color: #1DB954;">Add a new category for your products</p>
+        </div>
+        <div class="card-body p-4">
+            @* (50) Once we fill all inputs, we need to submit this form. For that we add method="post" attribute in the form 
+                This form will be posted in the category controller. There we have an HTTPPost CreatePost method which is hit when you submit this form.
+            *@
+            <form method="post">
+                @* (60) To add validations we have something called as asp-validation-summary This will display all the error meesages on top as "All" is selected
+                    All: gives all the errors on the page, along with the data annotations
+                    ModelOnly: returns the errors if they are linked with the model (In this case it is Category).
+                *@
+              @*   <div asp-validation-summary="All" class="text-danger mb-3"></div> *@
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                @* (64) Earlier we set the asp-validation-summary to "All"
+                    which will display all the errors on the page, along with the data annotations.
+                    However, if we want to display the validations on each field we will set it to ModelOnly 
+                    and add new tag helper asp-validation-for
+                    Same for DisplayOrder. This will displaydata annotations error messages.
+                    If something is not related to data annotations and is linked with the model itself
+                    (for eg duplicate category name), that will be
+                    displayed using asp-validation-summary *@
+                <div class="mb-3">
+                  @*   <label asp-for="Name" class="form-label fw-semibold small">Category Name</label> *@
+                  @* (118) Removig Category Name from here since we have asp-for, it would directly display the name given in Display attribute *@
+                    <label asp-for="Name" class="form-label fw-semibold small"></label>
+                    @* (47) The bind is done in cshtml using command "asp-for"
+                        asp-for is a tag helper attribute in ASP.NET Core that binds an HTML element to a model property
+                        The Name here in asp-for is the property under Category class model.
+                    *@
+                    <input type="text" name="Name" asp-for="Name" class="form-control" placeholder="Enter category name" />
+                    @* (48) OR you can aslo write @Model.Name but that is not required *@
+               @*      <input type="text" name="Name" asp-for="@Model.Name" class="form-control" placeholder="Enter category name" /> *@
+
+                    <span asp-validation-for="Name" class="text-danger small"></span>
+                </div>
+                <div class="mb-3">
+                    @* (66)  adding asp-for here and same for name. This is added because when we click on the Label, the input box is highlighted automatically*@
+                    <label asp-for="DisplayOrder" class="form-label fw-semibold small">Display Order</label>
+@*                     (49) Same we will add for Display order
+ *@                    <input type="number" name="DisplayOrder" asp-for="DisplayOrder" class="form-control" placeholder="Enter display order" />
+                    <span asp-validation-for="DisplayOrder" class="text-danger small"></span>
+                </div>
+                <div class="d-flex gap-2 mt-4">
+                    <button type="submit" class="btn btn-accent fw-semibold">Create Category</button>
+                    @* (67) Adding Cancel button to go back the Category -> Index page *@
+                    <a asp-controller="Category" asp-action="Index" class="btn btn-light fw-medium">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@* (65) Adding client side validations
+This is in java script and is done using jquery validation plugin. This is already added in the _Layout.cshtml file.
+The scripts are referenced in the _ValidationScriptsPartial.cshtml file.
+So the data annotations are directly done on client side and the break point CreatePOST POST method of CategoryController is not hit.
+It is hit only when the client side/ data annotations validations are valid and we want to then call the HOST method
+// to then check the server side validation done inside the POST method or on Server side.
+*@
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
