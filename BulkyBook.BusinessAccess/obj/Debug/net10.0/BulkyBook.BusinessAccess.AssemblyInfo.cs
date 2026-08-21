@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BulkyBook.BusinessAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23c0e2d67d4b27f45c3fa936fd1aa0be198e5a29")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+353009455a21b0fe46cd6a19b84723ddab137044")]
 [assembly: System.Reflection.AssemblyProductAttribute("BulkyBook.BusinessAccess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BulkyBook.BusinessAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
